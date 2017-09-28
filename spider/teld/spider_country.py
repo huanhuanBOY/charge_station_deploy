@@ -11,7 +11,7 @@ from random import randint
 PROXY_FILE = './proxies.csv'
 
 with open(PROXY_FILE) as input_proxy_file:
-    proxy_list = []
+    proxy_list = ['no']
     for line in input_proxy_file:
         proxy_ip, proxy_port = line.split('\t')
         proxy_list.append("{}:{}".format(proxy_ip, proxy_port))
@@ -26,10 +26,13 @@ while(True):
 		for proxy_url in proxy_list:
 			try:
 				print("try proxy {} ...".format(proxy_url))
-				# create the object, assign it to a variable
-				proxy = urlrequest.ProxyHandler({'https': proxy_url})
-				# construct a new opener using your proxy settings
-				opener = urlrequest.build_opener(proxy)
+				if proxy_url != 'no':
+					# create the object, assign it to a variable
+					proxy = urlrequest.ProxyHandler({'https': proxy_url})
+					# construct a new opener using your proxy settings
+					opener = urlrequest.build_opener(proxy)
+				else:
+					opener = urlrequest.build_opener()
 				opener.addheaders = [('User-Agent', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_4) AppleWebKit/603.1.30 (KHTML, like Gecko) Version/10.1 Safari/603.1.30')]
 				# install the openen on the module-level
 				urlrequest.install_opener(opener)
