@@ -23,9 +23,13 @@ lastTime_detail = -1
 province_detail_list = ['上海市']
 
 def readURLjson(url):
-	jsonstr = urllib2.urlopen(urllib2.Request(url, headers=hdr))
-	jsonstr = jsonstr.read()
-	content = json.loads(jsonstr)
+	try:
+		jsonstr = urllib2.urlopen(urllib2.Request(url, headers=hdr))
+		jsonstr = jsonstr.read()
+		content = json.loads(jsonstr)
+	except Exception,e:
+		time.sleep(10)
+		content = readURLjson(url)
 	return content
 
 while(True):
