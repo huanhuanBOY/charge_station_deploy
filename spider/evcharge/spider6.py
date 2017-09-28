@@ -3,7 +3,6 @@ import numpy as np
 import json
 import ast
 from random import shuffle
-from apscheduler.schedulers.blocking import BlockingScheduler
 from datetime import datetime
 import ast
 from time import gmtime, strftime
